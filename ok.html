@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        .gg {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: blue;
+            display: flex;
+            flex-direction: column;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <script>
+        // 1
+        /* class Car {
+            constructor(color, speed, mark){
+                this.color = color;
+                this.speed = speed;
+                this.mark = mark;
+            }
+            getInfo(){
+                console.log(`Марка автомобиля: ${this.mark}, его цвет: ${this.color}, скорость: ${this.speed} км/ч`)
+            }
+        }
+        let car1 =  new Car('черный', 200, 'БМВ');
+        car1.getInfo(); */
+        
+        //2
+        /* class Person {
+            #name;
+            #age;
+            #sex;
+            constructor(sex){
+                this.#sex = sex;
+            }
+            get name(){
+                return this.#name;
+            }
+            get age(){
+                return this.#age;
+            }
+            get sex(){
+                return this.#sex;
+            }
+            set name(da){
+                this.#name = da;
+            }
+            set age(da){
+                this.#age = da;
+            }
+        }
+        let person1 = new Person('м');
+        person1.name = 'Сергей';
+        person1.age = 43;
+        console.log(person1.name);
+        console.log(person1.age);
+        console.log(person1.sex); */
+
+        //3
+        class ModWin {
+             #isDrag = false;
+            static offsetX;
+            static offsetY;
+            constructor(w, o, i) {
+                this.el = document.createElement('div');
+               
+                this._width = w;
+                this._ontext = o;
+                this._intext = i;
+                this.el.style.width = `${this._width}px`;
+                this.el.classList.add('gg');
+                this.on = document.createElement('h2');
+                this.on.innerText = this._ontext;
+                this.el.append(this.on);
+                this.inti = document.createElement('h3');
+                this.inti.innerText = this._intext;
+                this.el.append(this.inti);
+                document.body.append(this.el);
+
+
+                this.el.addEventListener('mousedown', (e) => {
+                    
+                    this.#isDrag = true;
+                    this.offsetX = e.pageX - parseInt(getComputedStyle(this.el).left);
+                    this.offsetY = e.pageY - parseInt(getComputedStyle(this.el).top);
+            
+                })
+                document.addEventListener('mouseup', () => {this.#isDrag = false;})
+                document.addEventListener('mousemove', (e) => {
+                if (this.#isDrag){    
+                    this.el.style.left = `calc(${e.pageX}px - ${this.offsetX}px)`
+                    this.el.style.top = `calc(${e.pageY}px - ${this.offsetY}px)`
+                }
+            })
+            }
+            setPosition(left, top){
+                this.el.style.left = `${left}px`;
+                this.el.style.top = `${top}px`;
+            }
+            setBackgroundColor(color){
+                this.el.style.backgroundColor = color;
+            }
+            setTextHeader(text){
+                this._ontext = text;
+                this.on.innerText = this._ontext;
+            }
+            setModalText(text){
+                this._intext = text;
+                this.inti.innerText = this._intext;
+            }
+
+        }
+        let modal1 = new ModWin(500, 'BULLSH', 'fair');
+        modal1.setPosition(200,200);
+        modal1.setBackgroundColor('red');
+        modal1.setTextHeader('Я новый заголовок');
+        modal1.setModalText('Я снизу');
+    </script>
+</body>
+</html>
